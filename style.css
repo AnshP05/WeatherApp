@@ -52,9 +52,11 @@ button:hover {
     text-align: center;
     display: inline-block;
     margin: 4px 2px;
-    border-radius: 16px;
+    border-radius: 30px;
+    gap: 0.5em;
     width: fit-content;
 }
+
 
 .icon-img {
     transition: 0.3s ease;
