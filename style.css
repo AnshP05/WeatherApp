@@ -31,7 +31,7 @@ body {
 }
 
 button {
-    margin: 0.5em;
+    margin: 0.8em;
     border-radius: 50%;
     border: none;
     height: 44px;
@@ -45,6 +45,24 @@ button {
 button:hover {
     background: #7c7c7c6b;
 }
+
+.units-button {
+    padding: 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+    border-radius: 16px;
+    width: fit-content;
+}
+
+.icon-img {
+    transition: 0.3s ease;
+}
+.rotate {
+    transform: rotateX(180deg);
+}
+
 
 input.search-bar {
     border: none;
