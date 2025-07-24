@@ -3,6 +3,7 @@ let currentCity = "Los Angeles"
 let usingCoords = false;
 let currentCoords = { lat : null, long : null}
 let debounceTimeout;
+let justSearched = false
 const suggestionList = document.querySelector(".suggestions")
 const options = {
     method : 'GET',
@@ -75,7 +76,15 @@ document.querySelector(".search button").addEventListener( "click", function() {
 
 document.querySelector(".search-bar").addEventListener('keyup', function(event) {
     const query = this.value.trim()
-
+    if(query === "") {
+        suggestionList.innerHTML = ""
+    }
+    if(event.key === "Enter") {
+        weather.search()
+        suggestionList.innerHTML = ""
+        justSearched = true;
+        return
+    }
     clearTimeout(debounceTimeout)
     debounceTimeout = setTimeout(() => {
         if(query.length < 3) return;
@@ -86,14 +95,11 @@ document.querySelector(".search-bar").addEventListener('keyup', function(event) 
         }
     }, 300)
     
-    if(event.key === "Enter") {
-        weather.search()
-        suggestionList.innerHTML = ""
-    }
 })
 
 function fetchCities(query) {
-    fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${query}&limit=5`, options)
+    if (!query || query.length < 3) return;
+    fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${query}&limit=3`, options)
     .then(response => response.json())
     .then(data => {
       suggestionList.innerHTML = ""
@@ -124,3 +130,13 @@ if(navigator.geolocation) {
 } else {
     weather.fetchWeather("Los Angeles")
 }
+
+document.addEventListener("click", function(event) {
+    const searchBar = document.querySelector(".search-bar")
+    const searchButton = document.querySelector(".search button")
+    const unitsButton = document.querySelector(".units-button")
+
+    if(!searchBar.contains(event.target) && !searchButton.contains(event.target) && !suggestionList.contains(event.target) && !unitsButton.contains(event.target)) {
+        suggestionList.innerHTML = ""
+    }
+})
