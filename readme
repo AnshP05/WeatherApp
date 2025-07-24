@@ -1,0 +1,40 @@
+# 🌦️ Weather App
+
+A simple and responsive weather application that fetches real-time weather data for any city using the OpenWeatherMap API. Built with HTML, CSS, and JavaScript, and deployed via GitHub Pages.
+
+## 🔗 Live Demo
+
+👉 [Click here to view the live app](https://anshp05.github.io/WeatherApp/)  
+
+---
+
+## 📸 Screenshots
+
+![Weather App Screenshot](./weatherAppScreenshot.png)
+
+---
+
+## ✨ Features
+
+- 🌍 Search for weather by city name
+- 🌡️ Displays temperature, weather condition, humidity, and wind speed
+- 🌓 Supports both metric and imperial units (optional toggle)
+- 🔄 Dynamic background changes (optional, if implemented)
+- ⚡ Real-time data using OpenWeatherMap API
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** HTML, CSS, JavaScript
+- **API:** [OpenWeatherMap API](https://openweathermap.org/api)
+- **Deployment:** GitHub Pages
+
+---
+
+## 🚀 Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/AnshP05/weather-app.git
