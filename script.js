@@ -48,14 +48,18 @@ let weather =  {
     },
     fetchCityImage : function(city) {
         const unsplashUrl  = `https://api.unsplash.com/photos/random?query=${city}&orientation=landscape&client_id=qa4-BU686muZSlowR1BUL58LGP-JJxc5o1wBZhb9qlI`
-
+        const creditDiv = document.querySelector(".photo-credit")
         return fetch(unsplashUrl).then(response => response.json()).then(data => {
-            if(data && data.urls && data.urls.full) {
+            if(data && data.urls && data.urls.full && data.user && data.user.name && data.user.links && data.user.links.html) {
+                creditDiv.innerHTML = `Photo by <a href="${data.user.links.html}?utm_source=weather_widget&utm_medium=referral" target="_blank" rel="noopener noreferrer">${data.user.name}</a> on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral" target="_blank" rel="noopener noreferrer">Unsplash</a>`;
                 return data.urls.full
             } else {
                 return 'background.jpg'
             }
-        }).catch(() => 'background.jpg')
+        }).catch(() => {
+            creditDiv.innerHTML = ''
+            return 'background.jpg'
+        })
 
     },
     search : function() {
