@@ -2,6 +2,8 @@ let imperialUnits = true
 let currentCity = "Los Angeles"
 let usingCoords = false;
 let currentCoords = { lat : null, long : null}
+let debounceTimeout;
+const suggestionList = document.querySelector(".suggestions")
 const options = {
     method : 'GET',
     headers : {
@@ -13,6 +15,7 @@ let weather =  {
     "apiKey": "ad24e848c0460261719422f8e020a356",
     fetchWeather : function (city) {
         currentCity = city
+        usingCoords = false;
         fetch(
             "https://api.openweathermap.org/data/2.5/weather?q="
              + city
@@ -23,7 +26,6 @@ let weather =  {
         )
             .then((response) => response.json())
             .then((data) => this.displayWeather(data))
-        usingCoords = false;
     },
     displayWeather : function(data) {
         const { name } = data
@@ -41,6 +43,7 @@ let weather =  {
     },
     search : function() {
         this.fetchWeather(document.querySelector(".search-bar").value)
+        document.querySelector(".suggestions").innerHTML = ""
     }, 
     fetchWeatherByCoords : function(lat, lon) {
         usingCoords = true;
@@ -71,8 +74,21 @@ document.querySelector(".search button").addEventListener( "click", function() {
 })
 
 document.querySelector(".search-bar").addEventListener('keyup', function(event) {
+    const query = this.value.trim()
+
+    clearTimeout(debounceTimeout)
+    debounceTimeout = setTimeout(() => {
+        if(query.length < 3) return;
+        if(query.length > 1) {
+            fetchCities(query)
+        } else {
+            suggestionList.innerHTML = ""
+        }
+    }, 300)
+    
     if(event.key === "Enter") {
         weather.search()
+        suggestionList.innerHTML = ""
     }
 })
 
@@ -80,8 +96,18 @@ function fetchCities(query) {
     fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${query}&limit=5`, options)
     .then(response => response.json())
     .then(data => {
-      console.log(data.data); // Array of city objects
-      // TODO: show suggestions in dropdown
+      suggestionList.innerHTML = ""
+      data.data.forEach(cityObj => {
+        const li = document.createElement("li")
+        li.textContent = cityObj.city
+        li.addEventListener("click", () => {
+            document.querySelector(".search-bar").value = cityObj.city.trim()
+            suggestionList.innerHTML = ""
+            weather.fetchWeather(cityObj.city)
+        })
+        suggestionList.appendChild(li)
+      });
+
     })
     .catch(error => console.error('Error fetching cities:', error));
 }
