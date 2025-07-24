@@ -106,14 +106,15 @@ function fetchCities(query) {
       data.data.forEach(cityObj => {
         const li = document.createElement("li")
         li.textContent = cityObj.city
-        li.addEventListener("click", () => {
+        li.addEventListener("click", (e) => {
+            e.stopPropagation()
             document.querySelector(".search-bar").value = cityObj.city.trim()
             suggestionList.innerHTML = ""
             weather.fetchWeather(cityObj.city)
         })
         suggestionList.appendChild(li)
       });
-
+      suggestionList.classList.add("show")
     })
     .catch(error => console.error('Error fetching cities:', error));
 }
@@ -137,6 +138,7 @@ document.addEventListener("click", function(event) {
     const unitsButton = document.querySelector(".units-button")
 
     if(!searchBar.contains(event.target) && !searchButton.contains(event.target) && !suggestionList.contains(event.target) && !unitsButton.contains(event.target)) {
+        suggestionList.classList.remove("show")
         suggestionList.innerHTML = ""
     }
 })
