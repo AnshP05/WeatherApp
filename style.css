@@ -6,11 +6,11 @@ body {
     height: 100vh;
     margin: 0;
     font-family: 'Open Sans', sans-serif;
-    background-image: url('background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     font-size: 120%;
+    transition: background-image 0.5s ease-in-out;    
 }
 /*This is what is holding all of our elements*/
 .card {

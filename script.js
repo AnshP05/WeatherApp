@@ -39,8 +39,24 @@ let weather =  {
         document.querySelector(".temp").innerText = temp + (imperialUnits ? " °F" : " °C")
         document.querySelector(".humidity").innerText = "Humidity: " + humidity + "%"
         document.querySelector(".wind").innerText = "Wind Speed: " + (imperialUnits ? speed : (speed * 3.6).toFixed(1)) + (imperialUnits ? " mph" : " kph");
-
         document.querySelector(".weather").classList.remove("loading")
+        this.fetchCityImage(data.name).then(url => {
+            const bgImage = new Image()
+            bgImage.onload = () => {document.body.style.backgroundImage = `url('${url}')`}
+            bgImage.src = url
+        })
+    },
+    fetchCityImage : function(city) {
+        const unsplashUrl  = `https://api.unsplash.com/photos/random?query=${city}&orientation=landscape&client_id=qa4-BU686muZSlowR1BUL58LGP-JJxc5o1wBZhb9qlI`
+
+        return fetch(unsplashUrl).then(response => response.json()).then(data => {
+            if(data && data.urls && data.urls.full) {
+                return data.urls.full
+            } else {
+                return 'background.jpg'
+            }
+        }).catch(() => 'background.jpg')
+
     },
     search : function() {
         this.fetchWeather(document.querySelector(".search-bar").value)
