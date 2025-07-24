@@ -1,6 +1,6 @@
 # 🌦️ Weather App
 
-A simple and responsive weather application that fetches real-time weather data for any city using the OpenWeatherMap API. Built with HTML, CSS, and JavaScript, and deployed via GitHub Pages.
+A sleek and responsive weather application that fetches real-time weather data, displays dynamic backgrounds based on the searched city, and provides autocomplete suggestions using three powerful APIs. Built with HTML, CSS, and JavaScript, and deployed via GitHub Pages.
 
 ## 🔗 Live Demo
 
@@ -16,37 +16,42 @@ A simple and responsive weather application that fetches real-time weather data 
 
 ## ✨ Features
 
-- 🌍 Search for weather by city name
-- 🌡️ Displays temperature, weather condition, humidity, and wind speed
-- 🌓 Supports both metric and imperial units (optional toggle)
-- 🔄 Dynamic background changes (optional, if implemented)
-- ⚡ Real-time data using OpenWeatherMap API
+- 🔍 Search for weather by city name
+- 🏙️ City autocomplete suggestions
+- 🌡️ Displays temperature, condition, humidity, and wind speed
+- 🔁 Toggle between Imperial and Metric units
+- 📸 Dynamic background images powered by Unsplash
+- ⚡ Real-time data from OpenWeatherMap
+- 📍 Automatic location detection using Geolocation
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML, CSS, JavaScript
-- **API:** [OpenWeatherMap API](https://openweathermap.org/api)
+- **Frontend:** HTML, CSS, JavaScript (Vanilla)
+- **APIs Used:**
+  - [OpenWeatherMap API](https://openweathermap.org/api) — real-time weather data
+  - [Unsplash API](https://unsplash.com/developers) — dynamic background images based on city
+  - [GeoDB Cities API](https://rapidapi.com/wirefreethought/api/geodb-cities) — location autocomplete suggestions
 - **Deployment:** GitHub Pages
+
+---
+
+## ⚙️ Background Image Note
+
+If the Unsplash API fails to return a city image, a fallback background (`background.jpg`) stored locally in the project root will be used. Make sure `background.jpg` exists in the root directory to avoid blank backgrounds.
 
 ---
 
 ## 🚀 Getting Started
 
-Clone the repository:
-
+1. Clone the repository:
 ```bash
 git clone https://github.com/AnshP05/weather-app.git
 cd weather-app
-open index.html in your browser
-
-
-
----
+2. Open index.html in your browser (or use Live Server in VS Code)
 
 ## 👨‍💻 Author
-
-**Ansh Parashar**  
-GitHub: [@AnshP05](https://github.com/AnshP05)  
-LinkedIn: [Your LinkedIn Here]  
+Ansh Parashar
+GitHub: @AnshP05
+LinkedIn: linkedin.com/in/ansh-parashar1430
